@@ -1,0 +1,15 @@
+    private let queue = DispatchQueue(label: "GCDUsage.queue", qos: .background, attributes: .concurrent)
+    private let queue2 = DispatchQueue(label: "GCDUsage.queue", qos: .background)
+    
+    func addWorkItem() {
+        let workItem1 = DispatchWorkItem() {
+            print("someWork1")
+        }
+        let workItem2 = DispatchWorkItem() {
+            print("someWork2")
+        }
+        
+        workItem1.notify(queue: .main) {
+            print("finish workItem1", workItem1.isCancelled)
+        }
+        
